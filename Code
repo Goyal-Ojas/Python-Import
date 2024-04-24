@@ -1,0 +1,111 @@
+"""
+@author: Ojas Goyal
+"""
+
+# Answer to Exercise 1
+import math
+
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+print("Is 1 a prime number?", is_prime(1))
+print("Is 5 a prime number?", is_prime(5))
+print("Is 6 a prime number?", is_prime(6))
+
+# Answer to Exercise 3
+A = {celsius: round(celsius * 9/5 + 32, 1) for celsius in range(0, 36)}
+print(A)
+
+# Answer to Exercise 4
+def convert_temp(degrees, cnv_type='ftoc'):
+    if isinstance(degrees, (int, float)):
+        if cnv_type == 'ftoc':
+            celsius = round((degrees - 32) * 5/9, 1)
+            return celsius
+        elif cnv_type == 'ctof':
+            fahrenheit = round(degrees * 9/5 + 32, 1)
+            return fahrenheit
+        else:
+            return -1
+    else:
+        return -2
+
+x = convert_temp(100)
+print(x)
+
+x = convert_temp(100, cnv_type='ftoc')
+print(x)
+
+x = convert_temp('100', 'ftoc')
+print(x)
+
+x = convert_temp(31, 'ctof')
+print(x)
+
+x = convert_temp(31, 'bla')
+print(x)
+
+# Answer to Exercise 5
+def sort_by_selected_key(dicts, keyname):
+    sorted_dicts = sorted(dicts, key=lambda x: x.get(keyname, None))
+    return sorted_dicts
+
+employees = [{'name': 'John', 'age': 28, 'years': 2.5},
+             {'name': 'Lisa', 'age': 24, 'years': 3.1},
+             {'name': 'Ella', 'age': 31, 'years': 2.9}]
+
+D = sort_by_selected_key(employees, 'name')
+print(D)
+
+D = sort_by_selected_key(employees, 'age')
+print(D)
+
+D = sort_by_selected_key(employees, 'years')
+print(D)
+
+# Answer to Exercise 6
+class Fish():
+    # 1. The attributes of the class Fish are 'first_name' and 'last_name'.
+
+    def __init__(self, first_name, last_name="Fish"):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    # 2. The methods of the class Fish are 'swim' and 'swim_backwards'.
+
+    def swim(self):
+        # swim method prints a message indicating the fish is swimming.
+        print("The fish is swimming")
+
+    def swim_backwards(self):
+        print("The fish can swim backwards")
+
+# 3. The parent class is Fish.
+
+class BlueTang(Fish):
+    
+    # 4. The child class (subclass) is BlueTang.
+
+    def forgetful(self):
+        print("The blue tang fish is forgetful")
+
+obj = Fish('Tropical')
+# 5. The code in line 14 is creating an instance of the Fish class with the first_name 'Tropical'.
+
+print(obj.first_name + ' ' + obj.last_name)
+# 6. In line 15, the `obj.swim()` call invokes the `swim()` method of the Fish class. Inside the `swim()` method, it prints "The fish is swimming". 
+
+Dory = BlueTang('Dory', 'DeGeneres')
+# 6. In line 20, the `Dory.swim()` call also invokes the `swim()` method of the Fish class, inherited by the BlueTang class through inheritance.
+
+print(Dory.first_name + ' ' + Dory.last_name)
+# 6. The `__init__` constructor method of the BlueTang class inherits from the Fish class, so when `Dory` is initialized, it sets the first_name and last_name attributes.
+# 6. Since the `swim()` method is not defined in the BlueTang class, Python looks for it in the parent class Fish, finds it there, and executes it.
+
+Dory.swim()
+# 7. The code in line 21 works because the `forgetful()` method is defined within the BlueTang class. When `Dory.forgetful()` is called, it executes the `forgetful()` method defined in the BlueTang class.
